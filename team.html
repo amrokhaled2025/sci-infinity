@@ -5,6 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>فريق المبادرة</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .team-member {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      position: relative;
+      min-height: 350px;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+    
+    .team-member img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 3px solid #8a2be2;
+      cursor: zoom-in;
+      transition: transform 0.3s ease;
+      display: none; /* Hidden by default */
+    }
+    
+    .team-member img.loaded {
+      display: block; /* Only show when loaded */
+    }
+    
+    .image-placeholder {
+      width: 100%;
+      height: 300px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      border: 3px dashed #ccc;
+    }
+    
+    /* Dark overlay for the expanded image */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      display: flex;
+    }
+    
+    /* Style for the expanded image */
+    .expanded {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 10px;
+      transform-origin: center center;
+      transition: transform 0.3s ease;
+    }
+    
+    /* Animation when the overlay is shown */
+    .overlay.active .expanded {
+      animation: zoomIn 0.3s ease forwards;
+    }
+    
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.5);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    .zoom-out {
+      animation: zoomOut 0.3s ease forwards;
+    }
+    
+    @keyframes zoomOut {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+    }
+    
+    /* Member info in overlay */
+    .member-info {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -19,6 +144,7 @@
         <li><a href="committees.html">اللجان</a></li>
         <li><a href="departments.html">الأقسام</a></li>
         <li><a href="team.html">الفريق</a></li>
+        <li><a href="contact.html">اتصل بنا</a></li> 
       </ul>
     </nav>
   </header>
@@ -26,12 +152,142 @@
   <main>
     <section>
       <h2>فريق المبادرة</h2>
-      <ul>
-        <li>تحت إشراف: أ.د محسن عوض زهران</li>
-        <li>رئيس المبادرة: عبدالرحمن سعد متولى</li>
-        <li>أمين عام المبادرة: آدم وليد البحيرى</li>
-      </ul>
+      <div class="team-grid">
+        <!-- Member 1 -->
+        <div class="team-member">
+          <div class="image-placeholder">جاري تحميل الصورة...</div>
+          <img src="images/team1.jpg" alt="المشرف العام" class="zoomable" data-name="Members">
+        </div>
+        
+        <!-- Member 2 -->
+        <div class="team-member">
+          <div class="image-placeholder">جاري تحميل الصورة...</div>
+          <img src="images/team2.jpg" alt="رئيس المبادرة" class="zoomable" data-name="Members">
+        </div>
+        
+        <!-- Member 3 -->
+        <div class="team-member">
+          <div class="image-placeholder">جاري تحميل الصورة...</div>
+          <img src="images/team3.jpg" alt="أمين عام المبادرة" class="zoomable" data-name="Members">
+        </div>
+        
+        <!-- Member 4 -->
+        <div class="team-member">
+          <div class="image-placeholder">جاري تحميل الصورة...</div>
+          <img src="images/team7.jpg" alt="عضو الفريق 4" class="zoomable" data-name="Members">
+        </div>
+        
+        <!-- Member 5 -->
+        <div class="team-member">
+          <div class="image-placeholder">جاري تحميل الصورة...</div>
+          <img src="images/team5.jpg" alt="عضو الفريق 5" class="zoomable" data-name="Members">
+        </div>
+        
+        <!-- Member 6 -->
+        <div class="team-member">
+          <div class="image-placeholder">جاري تحميل الصورة...</div>
+          <img src="images/team6.jpg" alt="عضو الفريق 6" class="zoomable" data-name="Members">
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- Dark overlay for zoomed image -->
+  <div id="overlay" class="overlay">
+    <img id="expanded-image" src="" alt="" class="expanded">
+    <div class="member-info" id="member-info"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Improved image loading with placeholders
+      const teamImages = document.querySelectorAll('.team-member img');
+      
+      teamImages.forEach(img => {
+        const placeholder = img.previousElementSibling;
+        
+        // Check if image is already loaded
+        if (img.complete && img.naturalWidth !== 0) {
+          img.classList.add('loaded');
+          placeholder.style.display = 'none';
+        } else {
+          img.onload = function() {
+            img.classList.add('loaded');
+            placeholder.style.display = 'none';
+          };
+          
+          img.onerror = function() {
+            placeholder.textContent = 'تعذر تحميل الصورة';
+            placeholder.style.backgroundColor = '#ffebee';
+            placeholder.style.color = '#c62828';
+          };
+        }
+      });
+      
+      // Zoom functionality for all loaded images
+      const overlay = document.getElementById('overlay');
+      const expandedImage = document.getElementById('expanded-image');
+      const memberInfo = document.getElementById('member-info');
+      
+      // Listen for clicks on team members
+      document.querySelectorAll('.team-member').forEach(member => {
+        member.addEventListener('click', function(e) {
+          // Find the loaded image in this team member
+          const img = this.querySelector('img.loaded');
+          
+          // Only proceed if clicked on a loaded image or its placeholder
+          if (img && (e.target === img || e.target === this.querySelector('.image-placeholder'))) {
+            // Get the position of the clicked image
+            const rect = img.getBoundingClientRect();
+            
+            // Set the expanded image source and info
+            expandedImage.src = img.src;
+            expandedImage.alt = img.alt;
+            memberInfo.textContent = img.dataset.name || '';
+            
+            // Set initial position and size for the expanded image
+            expandedImage.style.position = 'absolute';
+            expandedImage.style.left = rect.left + 'px';
+            expandedImage.style.top = rect.top + 'px';
+            expandedImage.style.width = rect.width + 'px';
+            expandedImage.style.height = rect.height + 'px';
+            
+            // Show the overlay
+            overlay.style.display = 'flex';
+            
+            // Force reflow to ensure styles are applied before adding active class
+            void overlay.offsetWidth;
+            
+            // Add active class to trigger animation
+            overlay.classList.add('active');
+            
+            // Reset position and size after initial positioning
+            setTimeout(() => {
+              expandedImage.style.position = 'static';
+              expandedImage.style.left = 'auto';
+              expandedImage.style.top = 'auto';
+              expandedImage.style.width = 'auto';
+              expandedImage.style.height = 'auto';
+            }, 10);
+          }
+        });
+      });
+      
+      overlay.addEventListener('click', function(e) {
+        // Only close if clicking directly on overlay (not the image)
+        if (e.target === overlay) {
+          // Add zoom-out animation
+          expandedImage.classList.add('zoom-out');
+          
+          // Wait for animation to complete before hiding
+          setTimeout(() => {
+            overlay.classList.remove('active');
+            expandedImage.classList.remove('zoom-out');
+            overlay.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

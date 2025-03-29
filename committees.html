@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لجان المبادرة</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .committees-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+    
+    .committee-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6a11cb, #8a2be2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 10px;
+      flex-direction: column;
+    }
+    
+    .committee-circle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .committee-circle .english {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+    
+    .committee-circle .arabic {
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -19,6 +59,7 @@
         <li><a href="committees.html">اللجان</a></li>
         <li><a href="departments.html">الأقسام</a></li>
         <li><a href="team.html">الفريق</a></li>
+        <li><a href="contact.html">اتصل بنا</a></li> 
       </ul>
     </nav>
   </header>
@@ -26,12 +67,28 @@
   <main>
     <section>
       <h2>لجان المبادرة</h2>
-      <ul>
-        <li>لجنة التنظيم</li>
-        <li>لجنة الموارد البشرية</li>
-        <li>لجنة الوسائط والتسويق</li>
-        <li>لجنة العلاقات العامة</li>
-      </ul>
+      <div class="committees-container">
+        <div class="committee-circle">
+          <div class="english">Organizing Committee</div>
+          <div class="arabic">لجنة التنظيم</div>
+        </div>
+        <div class="committee-circle">
+          <div class="english">HR Committee</div>
+          <div class="arabic">لجنة الموارد البشرية</div>
+        </div>
+        <div class="committee-circle">
+          <div class="english">Media & Marketing</div>
+          <div class="arabic">لجنة الوسائط والتسويق</div>
+        </div>
+        <div class="committee-circle">
+          <div class="english">Public Relations</div>
+          <div class="arabic">لجنة العلاقات العامة</div>
+        </div>
+        <div class="committee-circle">
+          <div class="english">Scientific Research</div>
+          <div class="arabic">لجنة البحث العلمي</div>
+        </div>
+      </div>
     </section>
   </main>
 </body>

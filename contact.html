@@ -104,8 +104,10 @@
     <section>
       <h2>اتصل بنا</h2>
       <div class="contact-form">
-        <form name="contact" method="POST" data-netlify="true" onsubmit="submit">
-          <input type="hidden" name="form-name" value="contact">
+        <form action="https://formsubmit.co/sciinfinity2025@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://sci-infinity.pages.dev/thank-you.html">
+          <input type="hidden" name="_template" value="table">
           
           <div class="form-group">
             <label for="name">الاسم الكامل:</label>
@@ -166,11 +168,11 @@
       }
       
       try {
+        // Submit to FormSubmit
         const formData = new FormData(form);
-        const response = await fetch('/', {
+        const response = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString()
+          body: formData
         });
         
         if (response.ok) {
@@ -178,11 +180,14 @@
           formMessage.className = 'form-message success';
           formMessage.style.display = 'block';
           form.reset();
+          
+          // Optionally redirect to thank-you page
+          // window.location.href = "https://yourdomain.com/thank-you.html";
         } else {
           throw new Error('Network response was not ok');
         }
       } catch (error) {
-        formMessage.textContent = 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرة على sci-infinity2025@gmail.com';
+        formMessage.textContent = 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرة على sciinfinity2025@gmail.com';
         formMessage.className = 'form-message error';
         formMessage.style.display = 'block';
       }

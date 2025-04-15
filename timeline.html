@@ -41,16 +41,12 @@
 </head>
 <body>
   <header>
-    <h1>مبادرة Scinfinity</h1>
+    <h1>Scinfinity</h1> <!-- This will be replaced by JavaScript -->
     <nav>
       <ul>
         <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="goals.html">الأهداف</a></li>
-        <li><a href="mission.html">الرسالة</a></li>
-        <li><a href="values.html">القيم</a></li>
         <li><a href="timeline.html">الخطة الزمنية</a></li>
         <li><a href="committees.html">اللجان</a></li>
-        <li><a href="departments.html">الأقسام</a></li>
         <li><a href="team.html">الفريق</a></li>
         <li><a href="contact.html">اتصل بنا</a></li> 
       </ul>
@@ -60,8 +56,12 @@
   <main>
     <section>
       <h2>الخطة الزمنية</h2>
-      <p>
-        تهدف المبادرة إلى إعداد باحث متميز ومبتكر. يبدأ الطريق بالتعليم الجامعي، ثم مساعدة الطلاب في اختيار مجال للدراسة والعمل. نقدم دورات تدريبية عملية ونظرية، ثم نعلم أساسيات البحث العلمي وتحليل البيانات. أخيرًا، نوفر بيئة تساعد الباحثين على التطبيق والإبداع من خلال إشراكهم في فرق بحثية مع نخبة من الباحثين.
+      <div class="section-header">
+        <h2>الخطة الزمنية</h2>
+        <div class="header-decoration"></div>
+      </div>
+      <p class="highlight-text">
+         يبدأ الطريق بالتعليم الجامعي، ثم مساعدة الطلاب في اختيار مجال للدراسة والعمل. نقدم دورات تدريبية عملية ونظرية، ثم نعلم أساسيات البحث العلمي وتحليل البيانات. أخيرًا، نوفر بيئة تساعد الباحثين على التطبيق والإبداع من خلال إشراكهم في فرق بحثية مع نخبة من الباحثين.
       </p>
 
       <!-- Add the PNG photo here -->
@@ -75,6 +75,13 @@
       </div>
     </section>
   </main>
+  <div class="floating-fb" aria-label="تابعنا على فيسبوك">
+    <a href="https://www.facebook.com/profile.php?id=61569116681397" target="_blank" class="fb-link">
+      <svg class="fb-icon" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+      </svg>
+    </a>
+  </div>
 
   <script>
     // JavaScript to expand the image on click
@@ -96,5 +103,6 @@
       }, 300); // Match the duration of the transition
     });
   </script>
+    <script src="script.js"></script>
 </body>
 </html>

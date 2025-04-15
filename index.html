@@ -3,21 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مبادرة Scinfinity</title>
+  <title>Scinfinity</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>مبادرة Scinfinity</h1>
+    <h1>Scinfinity</h1> 
     <nav>
       <ul>
         <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="goals.html">الأهداف</a></li>
-        <li><a href="mission.html">الرسالة</a></li>
-        <li><a href="values.html">القيم</a></li>
         <li><a href="timeline.html">الخطة الزمنية</a></li>
         <li><a href="committees.html">اللجان</a></li>
-        <li><a href="departments.html">الأقسام</a></li>
         <li><a href="team.html">الفريق</a></li>
         <li><a href="contact.html">اتصل بنا</a></li> 
       </ul>
@@ -25,12 +21,87 @@
   </header>
 
   <main>
-    <section>
-      <h2>مرحبًا بكم في مبادرة Scinfinity</h2>
-      <p>
+    <section id="about" class="fancy-section">
+      <div class="section-header">
+        <h2>مرحبًا بكم في مبادرة Scinfinity</h2>
+        <div class="header-decoration"></div>
+      </div>
+      <p class="highlight-text">
         مبادرة Scinfinity تهدف إلى نشر المعرفة وتطوير مهارات الطلاب والباحثين من خلال تقديم الدورات التدريبية وفرص البحث العلمي.
       </p>
     </section>
+
+    <section id="mission" class="fancy-section mission-section">
+      <div class="section-header">
+        <h2>رسالة المبادرة</h2>
+        <div class="header-decoration"></div>
+      </div>
+      <div class="mission-content">
+        <p>نشر المعرفة وتطوير مواهب الطلاب وإتاحة الفرص التدريبية والبحثية التي تؤهلهم لسوق العمل، وتقديم حلول فعالة لمشاكل المجتمع.</p>
+        <p>نسعى لتمكين الطلاب ذوي مهارات البحث العلمي لنشر أبحاثهم في مجالات عالمية.</p>
+      </div>
+    </section>
+
+   
+    <section id="goals" class="fancy-section goals-section">
+      <div class="section-header">
+        <h2>أهداف المبادرة</h2>
+        <div class="header-decoration"></div>
+      </div>
+      <ol class="styled-list">
+        <li><span>تقديم دورات تدريبية متميزة في مختلف المجالات</span></li>
+        <li><span>نشر المعرفة في المجالات المختلفة وتطبيقها في الواقع</span></li>
+        <li><span>تبادل الخبرات بين مختلف التخصصات</span></li>
+        <li><span>نشر الوعي بين عامة الناس</span></li>
+        <li><span>مساعدة الطلاب على تطبيق أفكارهم وتوفير الإمكانيات لنشر أوراق بحثية</span></li>
+        <li><span>تقديم دورات لتطوير الذات واكتساب المهارات اللازمة لسوق العمل</span></li>
+        <li><span>إنشاء مجلة علمية للطلاب والباحثين لنشر أفكارهم</span></li>
+        <li><span>إنشاء حلقة وصل بين الطلاب والباحثين المبدعين لتبادل الخبرات</span></li>
+      </ol>
+    </section>
+
+   
+    <section id="values" class="fancy-section values-section">
+      <div class="section-header">
+        <h2>قيم المبادرة</h2>
+        <div class="header-decoration"></div>
+      </div>
+      <ul class="values-grid">
+        <li class="value-card">
+          <h3>التميز</h3>
+          <p>تشجيع التميز من خلال مسابقات بين الطلاب والباحثين</p>
+        </li>
+        <li class="value-card">
+          <h3>التطوير</h3>
+          <p>العمل المستمر على تطوير الأداء</p>
+        </li>
+        <li class="value-card">
+          <h3>المساواة</h3>
+          <p>المساواة والعدل بين جميع الأعضاء</p>
+        </li>
+        <li class="value-card">
+          <h3>العمل الجماعي</h3>
+          <p>العمل الجماعي بين جميع الأعضاء</p>
+        </li>
+        <li class="value-card">
+          <h3>الدعم</h3>
+          <p>توفير جميع المتطلبات اللازمة للباحثين</p>
+        </li>
+        <li class="value-card">
+          <h3>الالتزام</h3>
+          <p>الالتزام باختلافات المهنة واختلافيات البحث العلمي</p>
+        </li>
+      </ul>
+    </section>
   </main>
+
+  <div class="floating-fb" aria-label="تابعنا على فيسبوك">
+    <a href="https://www.facebook.com/profile.php?id=61569116681397" target="_blank" class="fb-link">
+      <svg class="fb-icon" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+      </svg>
+    </a>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

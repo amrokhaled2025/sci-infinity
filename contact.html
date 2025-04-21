@@ -6,105 +6,193 @@
   <title>اتصل بنا - مبادرة Scinfinity</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .contact-form {
-      max-width: 600px;
+    .contact-container {
+      max-width: 700px;
       margin: 40px auto;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(226, 197, 253, 0.1));
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(46, 2, 46, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(138, 43, 226, 0.2);
+    }
+    
+    .section-header h2 {
+      color: #5e0a5e;
+      font-size: 2.2rem;
+      margin-bottom: 5px;
+      background: linear-gradient(to right, #8a2be2, #5e0a5e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
     
     label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       font-weight: bold;
+      color: #5e0a5e;
+      font-size: 1.1rem;
     }
     
     input, textarea, select {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #fff;
+      padding: 14px 20px;
+      border: 2px solid #e2c5fd;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.8);
       font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      border-color: #8a2be2;
+      box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.2);
+      outline: none;
     }
     
     textarea {
-      height: 150px;
-    }
-    
-    button {
-      background-color: #8a2be2;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
-    }
-    
-    button:hover {
-      background-color: #7b1fa2;
-    }
-    
-    .form-message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 5px;
-      display: none;
-    }
-    
-    .success {
-      background-color: #dff0d8;
-      color: #3c763d;
-    }
-    
-    .error {
-      background-color: #f2dede;
-      color: #a94442;
+      height: 180px;
+      resize: vertical;
     }
     
     .checkbox-group {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin: 20px 0;
+      gap: 12px;
+      margin: 25px 0;
+      padding: 15px;
+      background-color: rgba(226, 197, 253, 0.1);
+      border-radius: 12px;
     }
     
     .checkbox-group input[type="checkbox"] {
-      width: auto;
+      width: 20px;
+      height: 20px;
+      accent-color: #8a2be2;
+    }
+    
+    .checkbox-group label {
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+    
+    button {
+      background: linear-gradient(to right, #8a2be2, #5e0a5e);
+      color: white;
+      border: none;
+      padding: 16px 30px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    button::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+      );
+      transform: rotate(30deg);
+    }
+    
+    button:hover::after {
+      animation: shine 1.5s infinite;
+    }
+    
+    @keyframes shine {
+      100% {
+        left: 100%;
+      }
+    }
+    
+    .form-message {
+      margin-top: 25px;
+      padding: 18px;
+      border-radius: 12px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+      text-align: center;
+    }
+    
+    .success {
+      background-color: rgba(223, 240, 216, 0.9);
+      color: #3c763d;
+      border: 2px solid #d6e9c6;
+    }
+    
+    .error {
+      background-color: rgba(242, 222, 222, 0.9);
+      color: #a94442;
+      border: 2px solid #ebccd1;
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Floating label effect for select */
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a2be2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Scinfinity</h1> <!-- This will be replaced by JavaScript -->
+    <h1>Scinfinity</h1>
     <nav>
       <ul>
         <li><a href="index.html">الرئيسية</a></li>
         <li><a href="timeline.html">الخطة الزمنية</a></li>
         <li><a href="committees.html">اللجان</a></li>
         <li><a href="team.html">الفريق</a></li>
-        <li><a href="contact.html">اتصل بنا</a></li> 
+        <li><a href="contact.html" class="active">اتصل بنا</a></li>
+        <li><a href="upload.html">رفع الملفات</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section>
-      <section id="about" class="fancy-section">
-        <div class="section-header">
-          <h2>اتصل بنا</h2>
-      <div class="contact-form">
+    <section id="contact" class="fancy-section">
+      <div class="section-header">
+        <h2>اتصل بنا</h2>
+        <div class="header-decoration"></div>
+      </div>
+      
+      <div class="contact-container">
         <form action="https://formsubmit.co/476700b14489abc27ea33786710a6776" method="POST">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://sci-infinity.pages.dev/thank-you.html">
+          <input type="hidden" name="_next" value="https://sci-infinity.pages.dev/thank-you">
           <input type="hidden" name="_template" value="table">
           
           <div class="form-group">
@@ -134,70 +222,68 @@
             <textarea id="message" name="message" required></textarea>
           </div>
           
-          <!-- I'm not a robot checkbox -->
           <div class="checkbox-group">
             <input type="checkbox" id="not-robot" name="not-robot" required>
             <label for="not-robot">أنا لست روبوت</label>
           </div>
           
           <button type="submit">إرسال الرسالة</button>
+          
+          <div id="form-message" class="form-message"></div>
         </form>
-        
-        <div id="form-message" class="form-message"></div>
       </div>
     </section>
-    <div class="floating-fb" aria-label="تابعنا على فيسبوك">
-      <a href="https://www.facebook.com/profile.php?id=61569116681397" target="_blank" class="fb-link">
-        <svg class="fb-icon" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-        </svg>
-      </a>
-    </div>
   </main>
 
+  <div class="floating-fb" aria-label="تابعنا على فيسبوك">
+    <a href="https://www.facebook.com/profile.php?id=61569116681397" target="_blank" class="fb-link">
+      <svg class="fb-icon" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+      </svg>
+    </a>
+  </div>
+
   <script>
-    // Handle form submission
-    const form = document.querySelector('form');
-    const formMessage = document.getElementById('form-message');
-    
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form');
+      const formMessage = document.getElementById('form-message');
       
-      // Validate checkbox
-      const notRobot = document.getElementById('not-robot').checked;
-      if (!notRobot) {
-        formMessage.textContent = 'الرجاء التأكيد أنك لست روبوت';
-        formMessage.className = 'form-message error';
-        formMessage.style.display = 'block';
-        return;
-      }
-      
-      try {
-        // Submit to FormSubmit
-        const formData = new FormData(form);
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData
-        });
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
         
-        if (response.ok) {
-          formMessage.textContent = 'تم إرسال رسالتك بنجاح! سنتواصل معك قريبًا.';
-          formMessage.className = 'form-message success';
+        // Validate checkbox
+        const notRobot = document.getElementById('not-robot').checked;
+        if (!notRobot) {
+          formMessage.textContent = 'الرجاء التأكيد أنك لست روبوت';
+          formMessage.className = 'form-message error';
           formMessage.style.display = 'block';
-          form.reset();
-          
-          // Optionally redirect to thank-you page
-          // window.location.href = "https://yourdomain.com/thank-you.html";
-        } else {
-          throw new Error('Network response was not ok');
+          return;
         }
-      } catch (error) {
-        formMessage.textContent = 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرة على sciinfinity2025@gmail.com';
-        formMessage.className = 'form-message error';
-        formMessage.style.display = 'block';
-      }
+        
+        try {
+          // Submit to FormSubmit
+          const formData = new FormData(form);
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (response.ok) {
+            formMessage.textContent = 'تم إرسال رسالتك بنجاح! سنتواصل معك قريبًا.';
+            formMessage.className = 'form-message success';
+            formMessage.style.display = 'block';
+            form.reset();
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        } catch (error) {
+          formMessage.textContent = 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرة على sciinfinity2025@gmail.com';
+          formMessage.className = 'form-message error';
+          formMessage.style.display = 'block';
+        }
+      });
     });
   </script>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

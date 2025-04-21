@@ -1,24 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
   const header = document.querySelector('header h1');
   
-  // Clear existing content
+  
   header.innerHTML = '';
   header.style.display = 'flex';
   header.style.alignItems = 'center';
   header.style.justifyContent = 'center';
   header.style.gap = '15px';
   
-  // Create round logo (center)
   const logo = document.createElement('div');
   logo.className = 'scinfinity-logo';
   logo.innerHTML = '<img src="images/scilogo.jpg" alt="Scinfinity Logo">';
   header.appendChild(logo);
   
-  // Create text container
+
   const textContainer = document.createElement('div');
   textContainer.className = 'scinfinity-text';
   
-  // Add "Scinfinity" text (correct order)
+
   const text = document.createElement('span');
   text.className = 'scinfinity-main-text';
   text.textContent = 'Scinfinity';
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   header.appendChild(textContainer);
   
-  // Add minimal animations
+  
   const style = document.createElement('style');
   style.textContent = `
     .scinfinity-logo {

@@ -291,3 +291,81 @@ header h1 {
   font-size: 1.2em;
   vertical-align: middle;
 }
+/* Add this to your existing CSS */
+nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 0;
+}
+
+nav ul li {
+  margin: 0;
+  display: flex;
+}
+
+nav ul li a {
+  color: white;
+  background-color: #5e0a5e;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 2px solid transparent;
+}
+
+nav ul li a:hover {
+  background-color: #8a2be2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: #e2c5fd;
+}
+
+/* Language switcher styles */
+.language-switcher {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.language-btn {
+  background-color: #2e022e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.language-btn:hover {
+  background-color: #5e0a5e;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  nav ul {
+    gap: 8px;
+  }
+  
+  nav ul li a {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .language-switcher {
+    top: 10px;
+    left: 10px;
+  }
+}

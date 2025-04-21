@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المكتبة - مبادرة Scinfinity</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .resources-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .resource-card {
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(138, 43, 226, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(46, 2, 46, 0.1);
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .resource-preview {
+      height: 200px;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8a2be2;
+      font-size: 48px;
+    }
+    
+    .resource-info {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .resource-title {
+      color: #2e022e;
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+    
+    .resource-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    
+    .resource-description {
+      margin: 0 0 15px;
+      color: #333;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+    
+    .resource-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .download-btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      background-color: #8a2be2;
+      color: white;
+      border: none;
+      cursor: pointer;
+      flex-grow: 1;
+      text-align: center;
+    }
+    
+    .download-btn:hover {
+      background-color: #7b1fa2;
+    }
+    
+    .no-results {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 40px;
+      color: #666;
+    }
+    
+    @media (max-width: 768px) {
+      .resources-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Scinfinity</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="timeline.html">الخطة الزمنية</a></li>
+        <li><a href="committees.html">اللجان</a></li>
+        <li><a href="team.html">الفريق</a></li>
+        <li><a href="contact.html">اتصل بنا</a></li>
+        <li><a href="upload.html">رفع ملف</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="resources" class="fancy-section">
+      <div class="section-header">
+        <h2>المكتبة العلمية</h2>
+        <div class="header-decoration"></div>
+      </div>
+      
+      <div class="resources-container">
+        <ul class="resources-grid" id="resourcesGrid">
+          <!-- Example Resource 1 -->
+          <li class="resource-card">
+            <div class="resource-preview">
+              📄
+            </div>
+            <div class="resource-info">
+              <h3 class="resource-title">بحث في الذكاء الاصطناعي</h3>
+              <div class="resource-meta">
+                <span>فريق البحث العلمي</span>
+                <span>2023-10-15</span>
+              </div>
+              <p class="resource-description">بحث شامل عن تطبيقات الذكاء الاصطناعي في المجال الطبي</p>
+              <div class="resource-actions">
+                <a href="files/research1.pdf" download class="download-btn">تحميل PDF</a>
+              </div>
+            </div>
+          </li>
+          
+          <!-- Example Resource 2 -->
+          <li class="resource-card">
+            <div class="resource-preview">
+              📊
+            </div>
+            <div class="resource-info">
+              <h3 class="resource-title">عرض عن التعلم العميق</h3>
+              <div class="resource-meta">
+                <span>أحمد محمد</span>
+                <span>2023-09-22</span>
+              </div>
+              <p class="resource-description">مقدمة شاملة عن التعلم العميق وتطبيقاته</p>
+              <div class="resource-actions">
+                <a href="files/presentation1.pptx" download class="download-btn">تحميل PPTX</a>
+              </div>
+            </div>
+          </li>
+          
+          <!-- Example Resource 3 -->
+          <li class="resource-card">
+            <div class="resource-preview">
+              📝
+            </div>
+            <div class="resource-info">
+              <h3 class="resource-title">تقرير أمن المعلومات</h3>
+              <div class="resource-meta">
+                <span>فريق الأمن السيبراني</span>
+                <span>2023-11-05</span>
+              </div>
+              <p class="resource-description">تقرير مفصل عن أحدث تهديدات أمن المعلومات</p>
+              <div class="resource-actions">
+                <a href="files/report1.docx" download class="download-btn">تحميل DOCX</a>
+              </div>
+            </div>
+          </li>
+          
+          <!-- Add more resources as needed by duplicating the above structure -->
+          <!-- Remember to update the href, title, description, and other details -->
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div class="floating-fb" aria-label="تابعنا على فيسبوك">
+    <a href="https://www.facebook.com/profile.php?id=61569116681397" target="_blank" class="fb-link">
+      <svg class="fb-icon" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+      </svg>
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

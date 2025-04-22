@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const text = document.createElement('span');
   text.className = 'scinfinity-main-text';
-  text.textContent = 'Scinfinity';
+  text.textContent = 'Sci-Infinity';
   textContainer.appendChild(text);
   
   header.appendChild(textContainer);

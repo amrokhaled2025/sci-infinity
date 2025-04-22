@@ -9,7 +9,6 @@ body {
   text-align: right;
 }
 
-/* Header Styles */
 header {
   background-color: #2e022e;
   padding: 20px 0;
@@ -46,7 +45,6 @@ nav ul li a:hover {
   color: #e2c5fd;
 }
 
-/* Section Styles */
 .fancy-section {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 30px;
@@ -206,12 +204,12 @@ nav ul li a:hover {
 /* Floating Facebook Button */
 .floating-fb {
   position: fixed;
-  bottom: 20px;
+  bottom: 70px;
   left: 20px;
   z-index: 100;
   width: 42px;
   height: 42px;
-  background-color: #390041;
+  background-color: #90b7ff;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -221,7 +219,7 @@ nav ul li a:hover {
 }
 
 .floating-fb:hover {
-  background-color: #8a2be2;
+  background-color: #4452cc;
   transform: scale(1.1);
 }
 
@@ -368,4 +366,30 @@ nav ul li a:hover {
     top: 10px;
     left: 10px;
   }
+}
+.floating-whatsapp {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* Changed from right to left */
+  z-index: 100;
+  width: 42px;
+  height: 42px;
+  background-color: #25D366;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  transition: all 0.3s ease;
+}
+
+.floating-whatsapp:hover {
+  background-color: #128C7E;
+  transform: scale(1.1);
+}
+
+.whatsapp-icon {
+  width: 22px;
+  height: 22px;
+  fill: white;
 }

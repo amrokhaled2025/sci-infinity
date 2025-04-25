@@ -77,3 +77,30 @@ document.addEventListener('DOMContentLoaded', function() {
   `;
   document.head.appendChild(style);
 });
+document.addEventListener('DOMContentLoaded', function() {
+  const starfield = document.createElement('div');
+  starfield.className = 'starfield';
+  document.body.prepend(starfield);
+  
+  for (let i = 0; i < 200; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    
+    const size = Math.random() * 2 + 1;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const duration = Math.random() * 5 + 3;
+    
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.left = `${x}%`;
+    star.style.top = `${y}%`;
+    star.style.setProperty('--duration', `${duration}s`);
+    
+    if (size > 2) {
+      star.style.boxShadow = `0 0 ${size * 2}px white`;
+    }
+    
+    starfield.appendChild(star);
+  }
+});

@@ -6,65 +6,77 @@
   <title>فريق المبادرة</title>
   <link rel="stylesheet" href="style.css">
   <style>
+
+    .fancy-section {
+      background: rgba(10, 14, 32, 0.7) !important;
+    }
+
+
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 30px;
       padding: 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
     
+
     .team-member {
       text-align: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      padding: 25px;
+      background: rgba(138, 43, 226, 0.15);
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(46, 2, 46, 0.3);
+      transition: all 0.3s ease;
       position: relative;
       min-height: 350px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      overflow: hidden;
     }
     
     .team-member:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 30px rgba(138, 43, 226, 0.4);
+      background: rgba(138, 43, 226, 0.2);
     }
     
     .team-member img {
       width: 100%;
+      height: 100%;
       max-height: 300px;
-      object-fit: cover;
-      border-radius: 5px;
-      border: 3px solid #8a2be2;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 2px solid #8a2be2;
       cursor: zoom-in;
-      transition: transform 0.3s ease;
-      display: none; /* Hidden by default */
+      transition: all 0.3s ease;
+      display: none; 
     }
     
     .team-member img.loaded {
-      display: block; /* Only show when loaded */
+      display: block; 
     }
     
     .image-placeholder {
       width: 100%;
       height: 300px;
-      background-color: #f0f0f0;
-      border-radius: 5px;
+      background: rgba(138, 43, 226, 0.1);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #666;
-      border: 3px dashed #ccc;
+      color: #e2c5fd;
+      border: 2px dashed #8a2be2;
+      font-size: 1.1rem;
     }
     
-    /* Dark overlay for the expanded image */
     .overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.95);
       z-index: 1000;
       display: none;
       justify-content: center;
@@ -79,55 +91,52 @@
       display: flex;
     }
     
-    /* Style for the expanded image */
     .expanded {
       max-width: 90%;
       max-height: 90%;
       object-fit: contain;
-      border-radius: 10px;
-      transform-origin: center center;
-      transition: transform 0.3s ease;
+      border-radius: 15px;
+      border: 3px solid #8a2be2;
+      box-shadow: 0 0 40px rgba(138, 43, 226, 0.6);
+      transform: scale(0.8);
+      opacity: 0;
+      transition: all 0.3s ease;
     }
     
-    /* Animation when the overlay is shown */
     .overlay.active .expanded {
-      animation: zoomIn 0.3s ease forwards;
+      transform: scale(1);
+      opacity: 1;
     }
-    
-    @keyframes zoomIn {
-      from {
-        transform: scale(0.5);
-      }
-      to {
-        transform: scale(1);
-      }
+
+    .section-header h2 {
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(138, 43, 226, 0.5);
     }
-    
-    .zoom-out {
-      animation: zoomOut 0.3s ease forwards;
+
+    .header-decoration {
+      background: linear-gradient(90deg, #2e022e, #a855f7, #2e022e);
     }
-    
-    @keyframes zoomOut {
-      from {
-        transform: scale(1);
+
+    @media (max-width: 768px) {
+      .team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
       }
-      to {
-        transform: scale(0.5);
-        opacity: 0;
+      
+      .team-member {
+        min-height: 300px;
+        padding: 15px;
       }
-    }
-    
-    /* Member info in overlay */
-    .member-info {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: white;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      font-size: 1.2rem;
+      
+      .team-member img,
+      .image-placeholder {
+        height: 250px;
+      }
+      
+      .expanded {
+        max-width: 95%;
+        max-height: 95%;
+      }
     }
   </style>
 </head>
@@ -139,57 +148,59 @@
         <li><a href="index.html">الرئيسية</a></li>
         <li><a href="timeline.html">الخطة الزمنية</a></li>
         <li><a href="committees.html">اللجان</a></li>
-        <li><a href="team.html">الفريق</a></li>
+        <li><a href="team.html" class="active">الفريق</a></li>
         <li><a href="contact.html">اتصل بنا</a></li>
-        <li><a href="upload.html">رفع الملفات</a></li> 
+        <li><a href="upload.html">رفع الملفات</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section>
-      <section id="about" class="fancy-section">
-        <div class="section-header">
-          <h2>فريق العمل</h2>
+    <section class="fancy-section">
+      <div class="section-header">
+        <h2>فريق العمل</h2>
+        <div class="header-decoration"></div>
+      </div>
+      
       <div class="team-grid">
-        <!-- Member 1 -->
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team1.jpg" alt="المشرف العام" class="zoomable" data-name="Members">
+          <img src="images/team1.jpg" alt="المشرف العام" class="zoomable">
         </div>
         
-        <!-- Member 2 -->
+
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team2.jpg" alt="رئيس المبادرة" class="zoomable" data-name="Members">
+          <img src="images/team2.jpg" alt="رئيس المبادرة" class="zoomable">
         </div>
         
-        <!-- Member 3 -->
+
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team3.jpg" alt="أمين عام المبادرة" class="zoomable" data-name="Members">
+          <img src="images/team3.jpg" alt="أمين عام المبادرة" class="zoomable">
         </div>
         
-        <!-- Member 4 -->
+
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team7.jpg" alt="عضو الفريق 4" class="zoomable" data-name="Members">
+          <img src="images/team7.jpg" alt="عضو الفريق" class="zoomable">
         </div>
         
-        <!-- Member 5 -->
+
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team5.jpg" alt="عضو الفريق 5" class="zoomable" data-name="Members">
+          <img src="images/team5.jpg" alt="عضو الفريق" class="zoomable">
         </div>
         
-        <!-- Member 6 -->
+
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team6.jpg" alt="عضو الفريق 6" class="zoomable" data-name="Members">
+          <img src="images/team6.jpg" alt="عضو الفريق" class="zoomable">
         </div>
       </div>
     </section>
   </main>
+
   <div class="floating-fb" aria-label="تابعنا على فيسبوك">
     <a href="https://www.facebook.com/profile.php?id=61569116681397" target="_blank" class="fb-link">
       <svg class="fb-icon" viewBox="0 0 24 24">
@@ -198,21 +209,19 @@
     </a>
   </div>
 
-  <!-- Dark overlay for zoomed image -->
   <div id="overlay" class="overlay">
     <img id="expanded-image" src="" alt="" class="expanded">
-    <div class="member-info" id="member-info"></div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Improved image loading with placeholders
+
       const teamImages = document.querySelectorAll('.team-member img');
       
       teamImages.forEach(img => {
         const placeholder = img.previousElementSibling;
         
-        // Check if image is already loaded
+
         if (img.complete && img.naturalWidth !== 0) {
           img.classList.add('loaded');
           placeholder.style.display = 'none';
@@ -224,84 +233,61 @@
           
           img.onerror = function() {
             placeholder.textContent = 'تعذر تحميل الصورة';
-            placeholder.style.backgroundColor = '#ffebee';
-            placeholder.style.color = '#c62828';
+            placeholder.style.background = 'rgba(226, 197, 253, 0.1)';
+            placeholder.style.color = '#ff6b6b';
+            placeholder.style.borderColor = '#ff6b6b';
           };
         }
       });
       
-      // Zoom functionality for all loaded images
+
       const overlay = document.getElementById('overlay');
       const expandedImage = document.getElementById('expanded-image');
-      const memberInfo = document.getElementById('member-info');
       
-      // Listen for clicks on team members
       document.querySelectorAll('.team-member').forEach(member => {
         member.addEventListener('click', function(e) {
-          // Find the loaded image in this team member
+
           const img = this.querySelector('img.loaded');
           
-          // Only proceed if clicked on a loaded image or its placeholder
+
           if (img && (e.target === img || e.target === this.querySelector('.image-placeholder'))) {
-            // Get the position of the clicked image
-            const rect = img.getBoundingClientRect();
-            
-            // Set the expanded image source and info
+            // Set the expanded image source
             expandedImage.src = img.src;
             expandedImage.alt = img.alt;
-            memberInfo.textContent = img.dataset.name || '';
             
-            // Set initial position and size for the expanded image
-            expandedImage.style.position = 'absolute';
-            expandedImage.style.left = rect.left + 'px';
-            expandedImage.style.top = rect.top + 'px';
-            expandedImage.style.width = rect.width + 'px';
-            expandedImage.style.height = rect.height + 'px';
-            
-            // Show the overlay
+ 
             overlay.style.display = 'flex';
             
-            // Force reflow to ensure styles are applied before adding active class
+
             void overlay.offsetWidth;
             
-            // Add active class to trigger animation
+
             overlay.classList.add('active');
-            
-            // Reset position and size after initial positioning
-            setTimeout(() => {
-              expandedImage.style.position = 'static';
-              expandedImage.style.left = 'auto';
-              expandedImage.style.top = 'auto';
-              expandedImage.style.width = 'auto';
-              expandedImage.style.height = 'auto';
-            }, 10);
           }
         });
       });
       
       overlay.addEventListener('click', function(e) {
-        // Only close if clicking directly on overlay (not the image)
+
         if (e.target === overlay) {
-          // Add zoom-out animation
-          expandedImage.classList.add('zoom-out');
+          overlay.classList.remove('active');
           
-          // Wait for animation to complete before hiding
+
           setTimeout(() => {
-            overlay.classList.remove('active');
-            expandedImage.classList.remove('zoom-out');
             overlay.style.display = 'none';
           }, 300);
         }
       });
     });
   </script>
-    <script src="script.js"></script>
-    <div class="floating-whatsapp" aria-label="تواصل معنا على واتساب">
-      <a href="https://wa.me/message/NBVEEWVW4OIZJ1" target="_blank" class="whatsapp-link">
-        <svg class="whatsapp-icon" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.1-.23-.16-.48-.27z"/>
-        </svg>
-      </a>
-    </div>
+  
+  <script src="script.js"></script>
+  <div class="floating-whatsapp" aria-label="تواصل معنا على واتساب">
+    <a href="https://wa.me/message/NBVEEWVW4OIZJ1" target="_blank" class="whatsapp-link">
+      <svg class="whatsapp-icon" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.1-.23-.16-.48-.27z"/>
+      </svg>
+    </a>
+  </div>
 </body>
 </html>

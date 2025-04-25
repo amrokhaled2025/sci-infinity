@@ -18,22 +18,25 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #6a11cb, #8a2be2);
+      background: linear-gradient(135deg, rgba(12, 161, 222 0.7), rgba(75, 0, 130, 0.9));
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: bold;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+      transition: all 0.3s ease;
       padding: 10px;
       flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(226, 197, 253, 0.3);
     }
     
     .committee-circle:hover {
       transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
     }
     
     .committee-circle .english {
@@ -44,11 +47,17 @@
     .committee-circle .arabic {
       font-size: 1.2rem;
     }
+    
+    .section-header h2 {
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(138, 43, 226, 0.5);
+    }
   </style>
 </head>
 <body>
+  <div class="stars"></div>
   <header>
-    <h1>Sci-Infinity</h1> <!-- This will be replaced by JavaScript -->
+    <h1>Sci-Infinity</h1> 
     <nav>
       <ul>
         <li><a href="index.html">الرئيسية</a></li>

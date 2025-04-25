@@ -1,16 +1,73 @@
+
 body {
   font-family: 'Times New Roman', serif;
   font-size: 1.2em;
   margin: 0;
   padding: 0;
-  background-color: #eddaff;
-  color: rgb(0, 0, 0);
+  background: #0a0e20; 
+  color: white;
   min-height: 100vh;
   text-align: right;
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  animation: twinkle var(--duration) infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+.fancy-section {
+  background-color: rgba(10, 14, 32, 0.7);
+  padding: 30px;
+  border-radius: 15px;
+  margin: 30px auto;
+  max-width: 900px;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.committee-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ca1de, #4b0082);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+  transition: all 0.3s ease;
+  padding: 10px;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
 header {
-  background-color: #2e022e;
+  background: linear-gradient(135deg, #220222, #4b0082);
+  background-color: #220222;
   padding: 20px 0;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -46,15 +103,18 @@ nav ul li a:hover {
 }
 
 .fancy-section {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 30px;
   border-radius: 15px;
   margin: 30px auto;
   max-width: 900px;
-  box-shadow: 0 4px 15px rgba(46, 2, 46, 0.2);
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(138, 43, 226, 0.2);
 }
+
 
 .section-header {
   position: relative;
@@ -88,7 +148,7 @@ nav ul li a:hover {
   border-right: 4px solid #8a2be2;
 }
 
-/* Mission Section */
+
 .mission-section {
   background: linear-gradient(135deg, rgba(226, 197, 253, 0.7), rgba(255, 255, 255, 0.4));
 }
@@ -106,7 +166,7 @@ nav ul li a:hover {
   margin: 0;
 }
 
-/* Goals Section */
+
 .goals-section {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(226, 197, 253, 0.7));
 }
@@ -153,7 +213,7 @@ nav ul li a:hover {
   font-size: 1.1rem;
 }
 
-/* Values Section */
+
 .values-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -201,7 +261,6 @@ nav ul li a:hover {
   line-height: 1.6;
 }
 
-/* Floating Facebook Button */
 .floating-fb {
   position: fixed;
   bottom: 70px;
@@ -229,7 +288,7 @@ nav ul li a:hover {
   fill: white;
 }
 
-/* Footer Styles */
+
 footer {
   background-color: #2e022e;
   color: white;
@@ -244,7 +303,7 @@ footer {
   text-decoration: none;
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
   .values-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -289,7 +348,7 @@ header h1 {
   font-size: 1.2em;
   vertical-align: middle;
 }
-/* Add this to your existing CSS */
+
 nav ul {
   display: flex;
   justify-content: center;
@@ -323,7 +382,6 @@ nav ul li a:hover {
   border-color: #e2c5fd;
 }
 
-/* Language switcher styles */
 .language-switcher {
   position: fixed;
   top: 20px;
@@ -351,7 +409,6 @@ nav ul li a:hover {
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   nav ul {
     gap: 8px;
@@ -370,7 +427,7 @@ nav ul li a:hover {
 .floating-whatsapp {
   position: fixed;
   bottom: 20px;
-  left: 20px; /* Changed from right to left */
+  left: 20px; 
   z-index: 100;
   width: 42px;
   height: 42px;
@@ -392,4 +449,75 @@ nav ul li a:hover {
   width: 22px;
   height: 22px;
   fill: white;
+}
+body {
+  color: #e2e2ff; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+.highlight-text {
+  color: #ffffff;
+  background-color: rgba(138, 43, 226, 0.3);
+  border-right: 4px solid #a855f7;
+}
+
+
+input, textarea, select {
+  background-color: rgba(10, 14, 32, 0.8) !important;
+  border: 1px solid #8a2be2 !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #a855f7 !important;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3) !important;
+}
+
+
+::placeholder {
+  color: #b8b8d0 !important;
+  opacity: 0.7 !important;
+}
+
+
+.mission-section {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(10, 14, 32, 0.5)) !important;
+}
+
+.goals-section {
+  background: linear-gradient(135deg, rgba(10, 14, 32, 0.5), rgba(138, 43, 226, 0.2)) !important;
+}
+
+.styled-list li {
+  background-color: rgba(138, 43, 226, 0.15) !important;
+  color: #ffffff !important;
+}
+
+
+.value-card {
+  background-color: rgba(138, 43, 226, 0.15) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  color: #ffffff !important;
+}
+
+.value-card h3 {
+  color: #ffffff !important;
+}
+
+.value-card p {
+  color: #e2e2ff !important;
+}
+
+
+.checkbox-group {
+  background-color: rgba(138, 43, 226, 0.1) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+}
+
+input[type="checkbox"] {
+  accent-color: #8a2be2 !important;
 }

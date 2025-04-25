@@ -6,25 +6,23 @@
   <title>رفع الملفات - مبادرة Scinfinity</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .upload-container {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 40px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(226, 197, 253, 0.1));
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(46, 2, 46, 0.15);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(138, 43, 226, 0.2);
-    }
+  .upload-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 40px;
+    background: rgba(10, 14, 32, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(46, 2, 46, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+  }
     
-    .section-header h2 {
-      color: #5e0a5e;
-      font-size: 2.2rem;
-      margin-bottom: 5px;
-      background: linear-gradient(to right, #8a2be2, #5e0a5e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  .section-header h2 {
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 10px rgba(138, 43, 226, 0.5);
+  }
     
     .form-group {
       margin-bottom: 25px;
@@ -34,12 +32,12 @@
       display: block;
       margin-bottom: 10px;
       font-weight: bold;
-      color: #5e0a5e;
+      color: #ffffff;
       font-size: 1.1rem;
     }
     
     input, textarea, select {
-      width: 100%;
+      width: 95%;
       padding: 14px 20px;
       border: 2px solid #e2c5fd;
       border-radius: 12px;
@@ -66,10 +64,10 @@
       justify-content: center;
       padding: 50px 20px;
       border: 3px dashed #8a2be2;
-      border-radius: 15px;
+      border: 2px dashed #8a2be2 !important;
       cursor: pointer;
       transition: all 0.3s ease;
-      background-color: rgba(226, 197, 253, 0.1);
+      background-color: rgba(138, 43, 226, 0.1) !important;
     }
     
     .file-input-label:hover {
@@ -85,7 +83,7 @@
     
     .file-input-label .text {
       text-align: center;
-      color: #5e0a5e;
+      color: #ffffff;
     }
     
     .file-input-label .hint {
@@ -99,7 +97,7 @@
       padding: 10px 15px;
       background-color: rgba(138, 43, 226, 0.1);
       border-radius: 8px;
-      color: #5e0a5e;
+      color: #ffffff;
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -188,7 +186,6 @@
       border: 2px solid #ebccd1;
     }
     
-    /* Animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -282,13 +279,11 @@
       const submitBtn = document.getElementById('submitBtn');
       const formMessage = document.getElementById('formMessage');
       
-      // Show selected file name
       fileInput.addEventListener('change', function() {
         if (this.files.length > 0) {
           const file = this.files[0];
           fileNameDisplay.textContent = file.name + ` (${formatFileSize(file.size)})`;
           
-          // Validate file size
           if (file.size > 10 * 1024 * 1024) {
             formMessage.textContent = 'حجم الملف كبير جدًا (10MB كحد أقصى)';
             formMessage.className = 'form-message error';
@@ -303,7 +298,6 @@
         }
       });
       
-      // Handle drag and drop
       const dropArea = document.querySelector('.file-input-label');
       
       ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -343,7 +337,6 @@
         fileInput.dispatchEvent(event);
       }
       
-      // Handle form submission
       const form = document.querySelector('form');
       form.addEventListener('submit', function(e) {
         submitBtn.disabled = true;

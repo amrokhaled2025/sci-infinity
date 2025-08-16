@@ -6,11 +6,9 @@
   <title>فريق المبادرة</title>
   <link rel="stylesheet" href="style.css">
   <style>
-
     .fancy-section {
       background: rgba(10, 14, 32, 0.7) !important;
     }
-
 
     .team-grid {
       display: grid;
@@ -21,7 +19,6 @@
       margin: 0 auto;
     }
     
-
     .team-member {
       text-align: center;
       padding: 25px;
@@ -117,6 +114,57 @@
       background: linear-gradient(90deg, #2e022e, #a855f7, #2e022e);
     }
 
+    /* Committee sections styles */
+    .committee-section {
+      margin-top: 30px;
+    }
+    
+    .committee-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: rgba(138, 43, 226, 0.2);
+      border-radius: 10px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+    
+    .committee-header h3 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.3rem;
+    }
+    
+    .committee-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      background: rgba(138, 43, 226, 0.1);
+      border-radius: 0 0 10px 10px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-top: none;
+    }
+    
+    .member-name {
+      padding: 15px;
+      background: rgba(138, 43, 226, 0.15);
+      border-radius: 8px;
+      color: #e2c5fd;
+      text-align: center;
+      transition: all 0.2s ease;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      word-break: break-word;
+    }
+    
+    .member-name:hover {
+      background: rgba(138, 43, 226, 0.25);
+      transform: translateY(-2px);
+    }
+
     @media (max-width: 768px) {
       .team-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -136,6 +184,21 @@
       .expanded {
         max-width: 95%;
         max-height: 95%;
+      }
+      
+      .committee-members {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      
+      .member-name {
+        padding: 12px;
+        min-height: 50px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .committee-members {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -165,37 +228,106 @@
       <div class="team-grid">
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team1.jpg" alt="المشرف العام" class="zoomable">
+          <img src="images/ec.jpg" alt="المشرف العام" class="zoomable">
         </div>
         
-
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team2.jpg" alt="رئيس المبادرة" class="zoomable">
+          <img src="images/sl.jpg" alt="رئيس المبادرة" class="zoomable">
         </div>
         
-
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team3.jpg" alt="أمين عام المبادرة" class="zoomable">
+          <img src="images/hr.jpg" alt="أمين عام المبادرة" class="zoomable">
         </div>
         
-
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team7.jpg" alt="عضو الفريق" class="zoomable">
+          <img src="images/pr.jpg" alt="عضو الفريق" class="zoomable">
         </div>
         
-
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team5.jpg" alt="عضو الفريق" class="zoomable">
+          <img src="images/or.jpg" alt="عضو الفريق" class="zoomable">
         </div>
         
-
         <div class="team-member">
           <div class="image-placeholder">جاري تحميل الصورة...</div>
-          <img src="images/team6.jpg" alt="عضو الفريق" class="zoomable">
+          <img src="images/media.jpg" alt="عضو الفريق" class="zoomable">
+        </div>
+      </div>
+    </section>
+
+    <!-- Committees Sections -->
+    <section class="fancy-section">
+      <div class="section-header">
+        <h2>هيكل الفريق</h2>
+        <div class="header-decoration"></div>
+      </div>
+      
+      <div class="committee-section">
+        <div class="committee-header">
+          <h3>اللجنة التنفيذية</h3>
+        </div>
+        <div class="committee-members">
+          <div class="member-name">عبدالرحمن سعد (CEO)</div>
+          <div class="member-name">حسام الدين (COO)</div>
+          <div class="member-name">ادم وليد (GS)</div>
+        </div>
+      </div>
+      
+      <div class="committee-section">
+        <div class="committee-header">
+          <h3>قادة الفريق العلمي</h3>
+        </div>
+        <div class="committee-members">
+          <div class="member-name">عمرو خالد (Scientific Leader)</div>
+          <div class="member-name">عمر محمد (Scientific Leader)</div>
+        </div>
+      </div>
+      
+      <div class="committee-section">
+        <div class="committee-header">
+          <h3>الموارد البشرية</h3>
+        </div>
+        <div class="committee-members">
+          <div class="member-name">ادهم وليد (Head of HR)</div>
+          <div class="member-name">شهد الغندور (Vice Head of HR)</div>
+          <div class="member-name">اسراء سعد (Vice Head of HR)</div>
+        </div>
+      </div>
+      
+      <div class="committee-section">
+        <div class="committee-header">
+          <h3>العلاقات العامة</h3>
+        </div>
+        <div class="committee-members">
+          <div class="member-name">منى دهب (Head of PR)</div>
+          <div class="member-name">شهد ايمن (Vice Head of PR)</div>
+        </div>
+      </div>
+      
+      <div class="committee-section">
+        <div class="committee-header">
+          <h3>لجنة الإعلام</h3>
+        </div>
+        <div class="committee-members">
+          <div class="member-name">محمود فرحات (Head of Media)</div>
+          <div class="member-name">اية محمد (Head of Content Writing)</div>
+          <div class="member-name">سيف خالد (Content Manager)</div>
+          <div class="member-name">غنى قاسم (Head of Design)</div>
+          <div class="member-name">سعد فكري (Head of Video Editing)</div>
+          <div class="member-name">يوستينا ماجد (Head of Content Creation)</div>
+        </div>
+      </div>
+      
+      <div class="committee-section">
+        <div class="committee-header">
+          <h3>لجنة التنظيم</h3>
+        </div>
+        <div class="committee-members">
+          <div class="member-name">احمد الباز (Head of OR)</div>
+          <div class="member-name">الزهراء حسين (Vice Head of OR)</div>
         </div>
       </div>
     </section>
@@ -215,13 +347,11 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-
       const teamImages = document.querySelectorAll('.team-member img');
       
       teamImages.forEach(img => {
         const placeholder = img.previousElementSibling;
         
-
         if (img.complete && img.naturalWidth !== 0) {
           img.classList.add('loaded');
           placeholder.style.display = 'none';
@@ -240,39 +370,30 @@
         }
       });
       
-
       const overlay = document.getElementById('overlay');
       const expandedImage = document.getElementById('expanded-image');
       
       document.querySelectorAll('.team-member').forEach(member => {
         member.addEventListener('click', function(e) {
-
           const img = this.querySelector('img.loaded');
           
-
           if (img && (e.target === img || e.target === this.querySelector('.image-placeholder'))) {
-            // Set the expanded image source
             expandedImage.src = img.src;
             expandedImage.alt = img.alt;
             
- 
             overlay.style.display = 'flex';
             
-
             void overlay.offsetWidth;
             
-
             overlay.classList.add('active');
           }
         });
       });
       
       overlay.addEventListener('click', function(e) {
-
         if (e.target === overlay) {
           overlay.classList.remove('active');
           
-
           setTimeout(() => {
             overlay.style.display = 'none';
           }, 300);

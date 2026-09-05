@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مجلة Sci-Infinity</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* ─── hero ─── */
+        .magazine-hero {
+            background: linear-gradient(135deg, #1a011a, #3b006b);
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(46, 2, 46, 0.6);
+        }
+        .magazine-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(138, 43, 226, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+        .magazine-hero-content { position: relative; z-index: 2; }
+        .magazine-hero h2 {
+            color: #fff;
+            font-size: 2.8rem;
+            margin: 0 0 15px;
+            text-shadow: 0 2px 20px rgba(138, 43, 226, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .magazine-hero p {
+            color: #d4b5f7;
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .magazine-hero-decoration {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #a855f7, transparent);
+            margin: 25px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ─── cover (landing) ─── */
+        .magazine-cover-section {
+            max-width: 500px;
+            margin: 0 auto 50px;
+            text-align: center;
+            padding: 0 15px;
+        }
+        .magazine-cover-frame {
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(138, 43, 226, 0.45), 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: #1e1028;
+        }
+        .magazine-cover-frame:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(138, 43, 226, 0.6), 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+        .magazine-cover-frame img {
+            width: 100%;
+            display: block;
+            user-select: none;
+            -webkit-user-select: none;
+            pointer-events: none;
+        }
+        .magazine-cover-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to top, rgba(20, 2, 30, 0.85) 0%, rgba(20, 2, 30, 0.15) 45%, rgba(20, 2, 30, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .magazine-cover-frame:hover .magazine-cover-overlay { opacity: 1; }
+        .magazine-cover-open-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #8a2be2;
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.15rem;
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+            transform: translateY(15px);
+            transition: transform 0.35s ease;
+        }
+        .magazine-cover-frame:hover .magazine-cover-open-btn { transform: translateY(0); }
+        .magazine-cover-hint {
+            margin-top: 18px;
+            color: #d4b5f7;
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+        .magazine-cover-section.hidden-cover {
+            animation: coverFadeOut 0.5s ease forwards;
+            pointer-events: none;
+        }
+        @keyframes coverFadeOut {
+            to { opacity: 0; transform: scale(0.92); height: 0; margin: 0; overflow: hidden; }
+        }
+
+        /* ─── reader wrapper ─── */
+        .magazine-reader {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 15px;
+            display: none;
+            opacity: 0;
+        }
+        .magazine-reader.visible {
+            display: block;
+            animation: readerFadeIn 0.5s ease forwards;
+        }
+        @keyframes readerFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── top controls (close / page indicator / zoom) ─── */
+        .magazine-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 14px 18px;
+            background: rgba(46, 2, 46, 0.6);
+            border-radius: 14px;
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            backdrop-filter: blur(8px);
+            flex-wrap: wrap;
+        }
+        .magazine-close-btn,
+        .magazine-zoom-btn {
+            background: #5e0a5e;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            min-width: 44px;
+            justify-content: center;
+        }
+        .magazine-close-btn:hover,
+        .magazine-zoom-btn:hover:not(:disabled) {
+            background: #8a2be2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(138, 43, 226, 0.35);
+        }
+        .magazine-zoom-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .magazine-page-indicator {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            background: rgba(138, 43, 226, 0.2);
+            padding: 6px 18px;
+            border-radius: 30px;
+            min-width: 90px;
+            text-align: center;
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            letter-spacing: 0.5px;
+        }
+        .magazine-zoom-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(138, 43, 226, 0.12);
+            padding: 4px;
+            border-radius: 30px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+        .magazine-zoom-level {
+            color: #d4b5f7;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 48px;
+            text-align: center;
+        }
+        .magazine-controls-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(168, 85, 247, 0.3);
+            margin: 0 4px;
+        }
+
+        /* ─── stage: side arrow buttons flank the book ─── */
+        .magazine-stage {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .magazine-side-btn {
+            flex: 0 0 auto;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            background: rgba(46, 2, 46, 0.7);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+            transition: all 0.25s ease;
+        }
+        .magazine-side-btn:hover:not(:disabled) {
+            background: #8a2be2;
+            transform: scale(1.08);
+            box-shadow: 0 8px 24px rgba(138, 43, 226, 0.5);
+        }
+        .magazine-side-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .magazine-side-btn svg { pointer-events: none; }
+
+        /* ─── pages viewport (the open book) ─── */
+        .magazine-pages {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .magazine-page-viewport {
+            width: 100%;
+            border-radius: 10px;
+            overflow: auto;
+            background: transparent;
+            position: relative;
+        }
+        .magazine-page-viewport { cursor: zoom-in; }
+        .magazine-page-viewport.zoomed { cursor: zoom-out; }
+        .magazine-page-viewport.zoomed.dragging { cursor: grabbing; }
+
+        /* the open spread: up to two pages side by side */
+        .magazine-spread {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            justify-content: center;
+            gap: 4px;
+            transform-origin: center center;
+            transition: transform 0.25s ease;
+        }
+        .magazine-spread.single {
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .magazine-page-wrapper {
+            position: relative;
+            flex: 1 1 0;
+            min-width: 0;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f5f0fa;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(138, 43, 226, 0.15);
+        }
+        .magazine-spread.single .magazine-page-wrapper {
+            flex: 0 1 auto;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .magazine-spread:not(.single) .magazine-page-wrapper:first-child {
+            border-radius: 10px 2px 2px 10px;
+        }
+        .magazine-spread:not(.single) .magazine-page-wrapper:last-child {
+            border-radius: 2px 10px 10px 2px;
+        }
+        .magazine-page-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .magazine-page-wrapper img.loaded { opacity: 1; }
+
+        /* Defensive: guarantees pages stay visible even if an old external
+           stylesheet still has a stale ".magazine-page-wrapper{display:none}"
+           rule from a previous version of this page. */
+        .magazine-page-viewport .magazine-page-wrapper {
+            display: block !important;
+        }
+
+        /* subtle book-spine shadow between the two pages */
+        .magazine-spread:not(.single) {
+            position: relative;
+        }
+        .magazine-spread:not(.single)::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 14px;
+            margin-left: -7px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.18));
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        /* page-turn animation (RTL: forward exits/enters from the left) */
+        .magazine-spread.turn-in-next { animation: turnInFromLeft 0.4s ease forwards; }
+        .magazine-spread.turn-in-prev { animation: turnInFromRight 0.4s ease forwards; }
+        @keyframes turnInFromLeft {
+            from { opacity: 0; transform: translateX(-40px) rotateY(6deg); }
+            to { opacity: 1; transform: translateX(0) rotateY(0); }
+        }
+        @keyframes turnInFromRight {
+            from { opacity: 0; transform: translateX(40px) rotateY(-6deg); }
+            to { opacity: 1; transform: translateX(0) rotateY(0); }
+        }
+
+        /* watermark */
+        .magazine-page-wrapper::after {
+            content: 'SCI INFINITY';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-28deg);
+            font-size: clamp(1.4rem, 3.2vw, 3rem);
+            font-weight: 900;
+            color: rgba(138, 43, 226, 0.06);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-family: 'Times New Roman', serif;
+        }
+        .magazine-page-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg,
+                    transparent 0px,
+                    transparent 28px,
+                    rgba(138, 43, 226, 0.025) 28px,
+                    rgba(138, 43, 226, 0.025) 30px);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .magazine-page-number {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            background: rgba(10, 14, 32, 0.7);
+            backdrop-filter: blur(4px);
+            color: #d4b5f7;
+            font-size: 0.75rem;
+            padding: 3px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            z-index: 12;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .magazine-controls {
+                position: sticky;
+                top: 10px;
+                z-index: 100;
+                background: rgba(10, 14, 32, 0.92);
+                backdrop-filter: blur(12px);
+                margin-bottom: 16px;
+                padding: 10px 12px;
+                border-radius: 14px;
+                border: 1px solid rgba(168, 85, 247, 0.2);
+                gap: 8px;
+            }
+            .magazine-zoom-btn { padding: 8px 12px; font-size: 0.85rem; }
+            .magazine-page-indicator { font-size: 0.85rem; padding: 4px 12px; min-width: 70px; }
+            .magazine-hero { padding: 36px 15px 30px; margin-bottom: 24px; }
+            .magazine-hero h2 { font-size: 1.8rem; }
+            .magazine-hero p { font-size: 1.05rem; }
+            .magazine-page-number { bottom: 8px; right: 10px; font-size: 0.65rem; padding: 2px 8px; }
+            .magazine-cover-open-btn { padding: 11px 24px; font-size: 1rem; }
+
+            .magazine-stage { gap: 6px; }
+            .magazine-side-btn { width: 38px; height: 38px; }
+            .magazine-side-btn svg { width: 18px; height: 18px; }
+
+            /* stack the two spread pages vertically on small screens */
+            .magazine-spread {
+                flex-direction: column;
+            }
+            .magazine-spread:not(.single)::after { display: none; }
+            .magazine-spread:not(.single) .magazine-page-wrapper:first-child,
+            .magazine-spread:not(.single) .magazine-page-wrapper:last-child {
+                border-radius: 10px;
+            }
+            .magazine-spread:not(.single) .magazine-page-wrapper {
+                margin-bottom: 10px;
+            }
+        }
+
+        footer {
+            background: #1a011a;
+            color: #c4b0d6;
+            text-align: center;
+            padding: 24px 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(138, 43, 226, 0.15);
+        }
+        footer a { color: #a855f7; text-decoration: none; font-weight: 500; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sci-Infinity</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="timeline.html">الخطة الزمنية</a></li>
+                <li><a href="committees.html">اللجان</a></li>
+                <li><a href="team.html">الفريق</a></li>
+                <li><a href="magazine.html" class="active">المجلة</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+                <li><a href="upload.html">رفع الملفات</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="magazine-hero">
+            <div class="magazine-hero-content">
+                <h2>📖 مجلة Sci-Infinity</h2>
+                <p>استكشف المعرفة العلمية، الأفكار، الاكتشافات، الابتكار، وريادة الأعمال.</p>
+                <div class="magazine-hero-decoration"></div>
+            </div>
+        </section>
+
+        <!-- Cover (landing) -->
+        <section class="magazine-cover-section" id="magazineCoverSection">
+            <div class="magazine-cover-frame" id="magazineCoverFrame" role="button" tabindex="0"
+                 aria-label="افتح المجلة">
+                <img id="magazineCoverImg" src="images/magazine/1.png" alt="غلاف مجلة Sci-Infinity">
+                <div class="magazine-cover-overlay">
+                    <span class="magazine-cover-open-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 4C7 4 2.7 7.1 1 12c1.7 4.9 6 8 11 8s9.3-3.1 11-8c-1.7-4.9-6-8-11-8zm0 13.5A5.5 5.5 0 1 1 17.5 12 5.51 5.51 0 0 1 12 17.5zm0-9A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5z"/></svg>
+                        اضغط لفتح المجلة
+                    </span>
+                </div>
+            </div>
+            <p class="magazine-cover-hint">اضغط على الغلاف لبدء التصفح</p>
+        </section>
+
+        <!-- Reader -->
+        <section class="magazine-reader" id="magazineReader">
+            <div class="magazine-controls">
+                <button class="magazine-close-btn" id="magazineCloseBtn" aria-label="إغلاق المجلة">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg>
+                </button>
+                <div class="magazine-controls-divider"></div>
+                <span class="magazine-page-indicator">1 / 39</span>
+                <div class="magazine-controls-divider"></div>
+                <div class="magazine-zoom-group">
+                    <button class="magazine-zoom-btn magazine-zoom-out" aria-label="تصغير">−</button>
+                    <span class="magazine-zoom-level">100%</span>
+                    <button class="magazine-zoom-btn magazine-zoom-in" aria-label="تكبير">+</button>
+                    <button class="magazine-zoom-btn magazine-zoom-reset" aria-label="إعادة الضبط">
+                        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8a8 8 0 0 0 7.73-6h-2.08a5.99 5.99 0 0 1-5.65 4c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="magazine-stage">
+                <!-- next = moving forward = right side, arrow points right -->
+                <button class="magazine-side-btn magazine-next" aria-label="الصفحة التالية">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8.5 6l1.4 1.4L5.3 12l4.6 4.6L8.5 18l-6-6z"/></svg>
+                </button>
+
+                <div class="magazine-pages" id="magazinePages">
+                    <!-- Generated by JavaScript -->
+                </div>
+
+                <!-- previous = toward the cover = left side, arrow points left -->
+                <button class="magazine-side-btn magazine-prev" aria-label="الصفحة السابقة">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.5 6l-1.4 1.4L18.7 12l-4.6 4.6L15.5 18l6-6z"/></svg>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Social (style from style.css) -->
+    <div class="floating-fb" aria-label="تابعنا على فيسبوك">
+        <a href="https://www.facebook.com/profile.php?id=61569116681397" target="_blank" class="fb-link">
+            <svg class="fb-icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+            </svg>
+        </a>
+    </div>
+    <div class="floating-whatsapp" aria-label="تواصل معنا على واتساب">
+        <a href="https://wa.me/message/NBVEEWVW4OIZJ1" target="_blank" class="whatsapp-link">
+            <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.1-.23-.16-.48-.27z"/>
+            </svg>
+        </a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sci-Infinity. جميع الحقوق محفوظة.</p>
+        <p>للتواصل: <a href="mailto:scinfinity.official@gmail.com">scinfinity.official@gmail.com</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- ─── magazine reader logic ─── -->
+    <script>
+        (function() {
+            'use strict';
+
+            const TOTAL_PAGES = 39; // 1.png ... 39.png
+
+            // Build spreads: spread 0 = [cover only]; then pairs (2,3), (4,5), ... (38,39)
+            const spreads = [[0]]; // page indices are 0-based (page 1 = index 0)
+            for (let p = 1; p < TOTAL_PAGES; p += 2) {
+                if (p + 1 < TOTAL_PAGES) {
+                    spreads.push([p, p + 1]);
+                } else {
+                    spreads.push([p]); // safety net if page count is even total (unused here, 39 is odd -> exact pairs)
+                }
+            }
+            const TOTAL_SPREADS = spreads.length;
+
+            function pagePath(pageIndex) {
+                return 'images/magazine/' + (pageIndex + 1) + '.png';
+            }
+
+            const coverSection = document.getElementById('magazineCoverSection');
+            const coverFrame = document.getElementById('magazineCoverFrame');
+            const readerSection = document.getElementById('magazineReader');
+            const pagesHost = document.getElementById('magazinePages');
+            const closeBtn = document.getElementById('magazineCloseBtn');
+            const prevBtn = document.querySelector('.magazine-prev');
+            const nextBtn = document.querySelector('.magazine-next');
+            const indicator = document.querySelector('.magazine-page-indicator');
+            const zoomInBtn = document.querySelector('.magazine-zoom-in');
+            const zoomOutBtn = document.querySelector('.magazine-zoom-out');
+            const zoomResetBtn = document.querySelector('.magazine-zoom-reset');
+            const zoomLevelLabel = document.querySelector('.magazine-zoom-level');
+
+            let currentSpread = 0;
+            let viewport = null;
+            let spreadEls = []; // one DOM element per spread, built lazily
+
+            // ─── zoom state ───
+            const MIN_ZOOM = 1;
+            const MAX_ZOOM = 2.5;
+            const ZOOM_STEP = 0.25;
+            let zoomLevel = 1;
+            let panX = 0, panY = 0;
+            let isDragging = false;
+            let dragStartX = 0, dragStartY = 0;
+
+            function buildViewport() {
+                if (viewport) return;
+                viewport = document.createElement('div');
+                viewport.className = 'magazine-page-viewport';
+                pagesHost.appendChild(viewport);
+                setupZoomDrag();
+            }
+
+            function buildSpreadEl(spreadIdx) {
+                const pageIndices = spreads[spreadIdx];
+                const spreadEl = document.createElement('div');
+                spreadEl.className = 'magazine-spread' + (pageIndices.length === 1 ? ' single' : '');
+                spreadEl.dataset.spread = spreadIdx;
+
+                pageIndices.forEach(function(pageIndex) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'magazine-page-wrapper';
+
+                    const img = document.createElement('img');
+                    img.src = pagePath(pageIndex);
+                    img.alt = 'صفحة ' + (pageIndex + 1);
+                    img.loading = spreadIdx === 0 ? 'eager' : 'lazy';
+                    img.draggable = false;
+                    img.addEventListener('load', function() { img.classList.add('loaded'); });
+                    img.addEventListener('error', function() {
+                        wrapper.style.background = '#1e1028';
+                        wrapper.style.display = 'flex';
+                        wrapper.style.alignItems = 'center';
+                        wrapper.style.justifyContent = 'center';
+                        wrapper.style.minHeight = '260px';
+                        wrapper.innerHTML =
+                            '<span style="opacity:0.5;color:#a855f7;font-size:1rem;">⚠️ تعذر تحميل الصفحة ' + (pageIndex + 1) + '</span>';
+                    });
+                    wrapper.appendChild(img);
+
+                    const badge = document.createElement('span');
+                    badge.className = 'magazine-page-number';
+                    badge.textContent = 'صفحة ' + (pageIndex + 1);
+                    wrapper.appendChild(badge);
+
+                    spreadEl.appendChild(wrapper);
+                });
+
+                return spreadEl;
+            }
+
+            function getSpreadEl(spreadIdx) {
+                if (!spreadEls[spreadIdx]) {
+                    spreadEls[spreadIdx] = buildSpreadEl(spreadIdx);
+                }
+                return spreadEls[spreadIdx];
+            }
+
+            function applyZoomTransform() {
+                const activeSpread = viewport.querySelector('.magazine-spread');
+                if (!activeSpread) return;
+                activeSpread.style.transform = 'scale(' + zoomLevel + ') translate(' + (panX / zoomLevel) + 'px, ' + (panY / zoomLevel) + 'px)';
+                viewport.classList.toggle('zoomed', zoomLevel > 1);
+                zoomLevelLabel.textContent = Math.round(zoomLevel * 100) + '%';
+                zoomOutBtn.disabled = zoomLevel <= MIN_ZOOM;
+                zoomInBtn.disabled = zoomLevel >= MAX_ZOOM;
+            }
+
+            function resetZoom() {
+                zoomLevel = 1;
+                panX = 0;
+                panY = 0;
+                const activeSpread = viewport ? viewport.querySelector('.magazine-spread') : null;
+                if (activeSpread) activeSpread.style.transformOrigin = 'center center';
+                applyZoomTransform();
+            }
+
+            // Zoom in centered on a given viewport-relative point (clientX/clientY),
+            // or zoom back out to 100% if already zoomed in.
+            function zoomAtPoint(clientX, clientY) {
+                const activeSpread = viewport.querySelector('.magazine-spread');
+                if (!activeSpread) return;
+
+                if (zoomLevel > 1) {
+                    resetZoom();
+                    return;
+                }
+
+                const rect = activeSpread.getBoundingClientRect();
+                const relX = ((clientX - rect.left) / rect.width) * 100;
+                const relY = ((clientY - rect.top) / rect.height) * 100;
+                activeSpread.style.transformOrigin =
+                    Math.max(0, Math.min(100, relX)) + '% ' + Math.max(0, Math.min(100, relY)) + '%';
+
+                zoomLevel = 2;
+                panX = 0;
+                panY = 0;
+                applyZoomTransform();
+            }
+
+            function setupZoomDrag() {
+                zoomInBtn.addEventListener('click', function() {
+                    zoomLevel = Math.min(MAX_ZOOM, +(zoomLevel + ZOOM_STEP).toFixed(2));
+                    applyZoomTransform();
+                });
+                zoomOutBtn.addEventListener('click', function() {
+                    zoomLevel = Math.max(MIN_ZOOM, +(zoomLevel - ZOOM_STEP).toFixed(2));
+                    if (zoomLevel === MIN_ZOOM) { panX = 0; panY = 0; }
+                    applyZoomTransform();
+                });
+                zoomResetBtn.addEventListener('click', resetZoom);
+
+                // ─── mouse: drag-to-pan when zoomed, plain click = zoom at cursor ───
+                let clickStartX = 0, clickStartY = 0, hasMoved = false;
+                const CLICK_MOVE_THRESHOLD = 6;
+
+                viewport.addEventListener('mousedown', function(e) {
+                    clickStartX = e.clientX;
+                    clickStartY = e.clientY;
+                    hasMoved = false;
+                    if (zoomLevel > 1) {
+                        isDragging = true;
+                        viewport.classList.add('dragging');
+                        dragStartX = e.clientX - panX;
+                        dragStartY = e.clientY - panY;
+                        e.preventDefault();
+                    }
+                });
+                window.addEventListener('mousemove', function(e) {
+                    if (Math.hypot(e.clientX - clickStartX, e.clientY - clickStartY) > CLICK_MOVE_THRESHOLD) {
+                        hasMoved = true;
+                    }
+                    if (!isDragging) return;
+                    panX = e.clientX - dragStartX;
+                    panY = e.clientY - dragStartY;
+                    applyZoomTransform();
+                });
+                window.addEventListener('mouseup', function() {
+                    isDragging = false;
+                    viewport.classList.remove('dragging');
+                });
+                viewport.addEventListener('click', function(e) {
+                    if (hasMoved) { hasMoved = false; return; }
+                    zoomAtPoint(e.clientX, e.clientY);
+                });
+
+                // ─── touch: drag-to-pan when zoomed, tap = zoom at touch point ───
+                viewport.addEventListener('touchstart', function(e) {
+                    if (e.touches.length !== 1) return;
+                    clickStartX = e.touches[0].clientX;
+                    clickStartY = e.touches[0].clientY;
+                    hasMoved = false;
+                    if (zoomLevel > 1) {
+                        isDragging = true;
+                        dragStartX = e.touches[0].clientX - panX;
+                        dragStartY = e.touches[0].clientY - panY;
+                    }
+                }, { passive: true });
+                viewport.addEventListener('touchmove', function(e) {
+                    if (e.touches.length !== 1) return;
+                    if (Math.hypot(e.touches[0].clientX - clickStartX, e.touches[0].clientY - clickStartY) > CLICK_MOVE_THRESHOLD) {
+                        hasMoved = true;
+                    }
+                    if (!isDragging) return;
+                    panX = e.touches[0].clientX - dragStartX;
+                    panY = e.touches[0].clientY - dragStartY;
+                    applyZoomTransform();
+                }, { passive: true });
+                viewport.addEventListener('touchend', function(e) {
+                    isDragging = false;
+                    if (!hasMoved && e.changedTouches && e.changedTouches.length === 1) {
+                        zoomAtPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                    }
+                    hasMoved = false;
+                });
+            }
+
+            function updateIndicator(spreadIdx) {
+                const pageIndices = spreads[spreadIdx];
+                if (pageIndices.length === 1) {
+                    indicator.textContent = (pageIndices[0] + 1) + ' / ' + TOTAL_PAGES;
+                } else {
+                    indicator.textContent = (pageIndices[0] + 1) + '-' + (pageIndices[1] + 1) + ' / ' + TOTAL_PAGES;
+                }
+            }
+
+            function showSpread(spreadIdx, direction) {
+                if (spreadIdx < 0 || spreadIdx >= TOTAL_SPREADS) return;
+                buildViewport();
+
+                const newEl = getSpreadEl(spreadIdx);
+                newEl.classList.remove('turn-in-next', 'turn-in-prev');
+                newEl.style.transform = ''; // clear any leftover zoom transform from a previous view
+                newEl.style.transformOrigin = 'center center';
+
+                // swap content
+                viewport.innerHTML = '';
+                viewport.appendChild(newEl);
+
+                if (direction === 'next' || direction === 'prev') {
+                    void newEl.offsetWidth;
+                    const animClass = direction === 'next' ? 'turn-in-next' : 'turn-in-prev';
+                    newEl.classList.add(animClass);
+                    // IMPORTANT: an "animation ... forwards" rule keeps overriding the
+                    // transform property after it ends, which would silently block the
+                    // zoom feature. Remove the class once the animation finishes so the
+                    // element's transform is free to be controlled by zoom again.
+                    newEl.addEventListener('animationend', function onDone() {
+                        newEl.classList.remove(animClass);
+                        newEl.removeEventListener('animationend', onDone);
+                    }, { once: true });
+                }
+
+                currentSpread = spreadIdx;
+                resetZoom();
+                updateIndicator(spreadIdx);
+                prevBtn.disabled = (spreadIdx === 0);
+                nextBtn.disabled = (spreadIdx === TOTAL_SPREADS - 1);
+            }
+
+            function openReader() {
+                coverSection.classList.add('hidden-cover');
+                setTimeout(function() {
+                    coverSection.style.display = 'none';
+                    readerSection.classList.add('visible');
+                    showSpread(0);
+                    readerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 480);
+            }
+
+            function closeReader() {
+                readerSection.classList.remove('visible');
+                coverSection.style.display = '';
+                void coverSection.offsetWidth;
+                coverSection.classList.remove('hidden-cover');
+                coverSection.style.animation = 'none';
+                coverSection.style.opacity = '1';
+                coverSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            coverFrame.addEventListener('click', openReader);
+            coverFrame.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openReader();
+                }
+            });
+
+            closeBtn.addEventListener('click', closeReader);
+
+            // RTL book: "previous" moves toward the cover (left side arrow)
+            prevBtn.addEventListener('click', function() {
+                if (currentSpread > 0) showSpread(currentSpread - 1, 'prev');
+            });
+            // RTL book: "next" moves forward (right side arrow)
+            nextBtn.addEventListener('click', function() {
+                if (currentSpread < TOTAL_SPREADS - 1) showSpread(currentSpread + 1, 'next');
+            });
+
+            // keyboard (RTL: ArrowLeft = next, ArrowRight = previous)
+            document.addEventListener('keydown', function(e) {
+                if (!readerSection.classList.contains('visible')) return;
+                const rect = readerSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (!isVisible) return;
+
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    if (currentSpread < TOTAL_SPREADS - 1) showSpread(currentSpread + 1, 'next');
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    if (currentSpread > 0) showSpread(currentSpread - 1, 'prev');
+                } else if (e.key === 'Escape') {
+                    closeReader();
+                }
+            });
+
+            // ─── protection (right-click, drag, shortcuts, save/print) ───
+            coverFrame.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+
+            document.addEventListener('contextmenu', function(e) {
+                if (e.target.closest('.magazine-reader') || e.target.closest('.magazine-cover-frame')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                const inReader = readerSection.classList.contains('visible');
+                const rect = inReader ? readerSection.getBoundingClientRect() : coverSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (!isVisible) return;
+
+                if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'u')) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase()))) {
+                    e.preventDefault();
+                    return false;
+                }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            console.log('📖 مجلة Sci-Infinity جاهزة — ' + TOTAL_PAGES + ' صفحة / ' + TOTAL_SPREADS + ' فتحة');
+        })();
+    </script>
+</body>
+</html>

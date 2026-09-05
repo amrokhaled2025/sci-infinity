@@ -104,3 +104,5 @@ document.addEventListener('DOMContentLoaded', function() {
     starfield.appendChild(star);
   }
 });
+
+/* Magazine reader logic now lives self-contained inside magazine.html */

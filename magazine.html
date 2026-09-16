@@ -619,10 +619,18 @@
                     wrapper.className = 'magazine-page-wrapper';
 
                     const img = document.createElement('img');
-                    img.src = pagePath(pageIndex);
                     img.alt = 'صفحة ' + (pageIndex + 1);
                     img.loading = spreadIdx === 0 ? 'eager' : 'lazy';
                     img.draggable = false;
+                    // IMPORTANT: attach the load/error listeners BEFORE setting src.
+                    // If src is set first and the image is already in the browser's
+                    // cache (very common on mobile), the browser can fire "load"
+                    // synchronously/immediately — before a listener added afterwards
+                    // gets a chance to attach. That left the image stuck at
+                    // opacity:0 forever (invisible), which is why this showed up on
+                    // real mobile browsers but not on desktop / "Desktop site" mode
+                    // (those tend to do a fresh, slower load that leaves time for the
+                    // listener to attach first).
                     img.addEventListener('load', function() { img.classList.add('loaded'); });
                     img.addEventListener('error', function() {
                         wrapper.style.background = '#1e1028';
@@ -633,6 +641,13 @@
                         wrapper.innerHTML =
                             '<span style="opacity:0.5;color:#a855f7;font-size:1rem;">⚠️ تعذر تحميل الصفحة ' + (pageIndex + 1) + '</span>';
                     });
+                    img.src = pagePath(pageIndex);
+                    // Extra safety net: if the image was already fully loaded/cached
+                    // by the time we get here (img.complete), the "load" event may
+                    // never fire at all. Add the class directly in that case.
+                    if (img.complete && img.naturalWidth > 0) {
+                        img.classList.add('loaded');
+                    }
                     wrapper.appendChild(img);
 
                     const badge = document.createElement('span');

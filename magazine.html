@@ -558,17 +558,35 @@
             'use strict';
 
             const TOTAL_PAGES = 39; // 1.png ... 39.png
+            const MOBILE_BREAKPOINT = 768; // matches the CSS media query above
 
-            // Build spreads: spread 0 = [cover only]; then pairs (2,3), (4,5), ... (38,39)
-            const spreads = [[0]]; // page indices are 0-based (page 1 = index 0)
-            for (let p = 1; p < TOTAL_PAGES; p += 2) {
-                if (p + 1 < TOTAL_PAGES) {
-                    spreads.push([p, p + 1]);
-                } else {
-                    spreads.push([p]); // safety net if page count is even total (unused here, 39 is odd -> exact pairs)
-                }
+            function isMobileLayout() {
+                return window.innerWidth <= MOBILE_BREAKPOINT;
             }
-            const TOTAL_SPREADS = spreads.length;
+
+            // Build spreads:
+            //  - mobile: one page per spread (page-by-page reading)
+            //  - desktop: spread 0 = [cover only]; then pairs (2,3), (4,5), ... (38,39)
+            function buildSpreads(mobile) {
+                if (mobile) {
+                    const list = [];
+                    for (let p = 0; p < TOTAL_PAGES; p++) list.push([p]);
+                    return list;
+                }
+                const list = [[0]]; // page indices are 0-based (page 1 = index 0)
+                for (let p = 1; p < TOTAL_PAGES; p += 2) {
+                    if (p + 1 < TOTAL_PAGES) {
+                        list.push([p, p + 1]);
+                    } else {
+                        list.push([p]); // safety net if page count is even total (unused here, 39 is odd -> exact pairs)
+                    }
+                }
+                return list;
+            }
+
+            let mobileLayout = isMobileLayout();
+            let spreads = buildSpreads(mobileLayout);
+            let TOTAL_SPREADS = spreads.length;
 
             function pagePath(pageIndex) {
                 return 'images/magazine/' + (pageIndex + 1) + '.png';
@@ -828,6 +846,40 @@
                 updateIndicator(spreadIdx);
                 prevBtn.disabled = (spreadIdx === 0);
                 nextBtn.disabled = (spreadIdx === TOTAL_SPREADS - 1);
+            }
+
+            // Rebuild the spreads (single page vs. two-page) when crossing the
+            // mobile breakpoint (e.g. phone rotation, resizing a browser window,
+            // or opening dev tools' device toolbar), keeping the reader on the
+            // same page the visitor was looking at.
+            function relayout() {
+                const newMobile = isMobileLayout();
+                if (newMobile === mobileLayout) return;
+
+                const currentPage = spreads[currentSpread] ? spreads[currentSpread][0] : 0;
+
+                mobileLayout = newMobile;
+                spreads = buildSpreads(mobileLayout);
+                TOTAL_SPREADS = spreads.length;
+                spreadEls = []; // old spread elements were built for the previous grouping
+
+                const newSpreadIdx = spreads.findIndex(function(pageIndices) {
+                    return pageIndices.indexOf(currentPage) !== -1;
+                });
+                const targetSpread = newSpreadIdx === -1 ? 0 : newSpreadIdx;
+
+                if (readerSection.classList.contains('visible')) {
+                    showSpread(targetSpread);
+                } else {
+                    currentSpread = targetSpread;
+                }
+            }
+
+            const mobileLayoutQuery = window.matchMedia('(max-width: ' + MOBILE_BREAKPOINT + 'px)');
+            if (mobileLayoutQuery.addEventListener) {
+                mobileLayoutQuery.addEventListener('change', relayout);
+            } else if (mobileLayoutQuery.addListener) {
+                mobileLayoutQuery.addListener(relayout); // older Safari fallback
             }
 
             function openReader() {
